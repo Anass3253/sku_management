@@ -5,7 +5,7 @@ import 'dart:convert';
 
 class ItemsProvider extends StateNotifier<AsyncValue<List<ItemModel>>> {
   ItemsProvider() : super(const AsyncValue.loading());
-  final url = 'http://192.168.1.26:8000';
+  final url = 'http://10.0.2.2:8000';
   Future<void> fetchItems() async {
     try {
       final response = await http.get(Uri.parse('$url/item_management/'));
@@ -22,21 +22,23 @@ class ItemsProvider extends StateNotifier<AsyncValue<List<ItemModel>>> {
   Future<void> addItem(ItemModel item) async {
     var param = <String, dynamic>{};
     if (item.manualSku) {
+      print('Manual SKU is true, ${item.manualSku}');
       param = {
         'item_name': item.itemName,
         'category': item.category,
         'sub_category': item.subCategory,
         'brand_name': item.brandName,
         'sku_code': item.skuCode,
-        'is_sku_manual': item.manualSku,
+        'isManual': item.manualSku,
       };
     } else {
+      print('Manual SKU is false, ${item.manualSku}');
       param = {
         'item_name': item.itemName,
         'category': item.category,
         'sub_category': item.subCategory,
         'brand_name': item.brandName,
-        'is_sku_manual': item.manualSku,
+        'isManual': item.manualSku,
       };
     }
 

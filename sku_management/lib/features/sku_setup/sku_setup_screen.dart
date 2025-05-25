@@ -36,7 +36,9 @@ class _SkuSetupScreenState extends ConsumerState<SkuSetupScreen> {
     subCategoryController.clear();
     brandNameController.clear();
     skuCodeController.clear();
-    manualSku = false;
+    setState(() {
+      manualSku = false; // Reset manualSku to false
+    });
   }
 
   void addSku() {
